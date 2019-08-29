@@ -16,6 +16,7 @@
         <module>angel-base</module>
         <module>angel-util</module>
         <module>angel-db</module>
+        <module>angel-gen</module>
     </modules>
 
     <dependencyManagement>
