@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/angel-common/angel-base/angel-base.iml" filepath="$PROJECT_DIR$/angel-common/angel-base/angel-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angel-common/angel-common.iml" filepath="$PROJECT_DIR$/angel-common/angel-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angel-common/angel-db/angel-db.iml" filepath="$PROJECT_DIR$/angel-common/angel-db/angel-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angel-spring.iml" filepath="$PROJECT_DIR$/angel-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angel-test/angel-test.iml" filepath="$PROJECT_DIR$/angel-test/angel-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angel-common/angel-util/angel-util.iml" filepath="$PROJECT_DIR$/angel-common/angel-util/angel-util.iml" />
+    </modules>
+  </component>
+</project>
