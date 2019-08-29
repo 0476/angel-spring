@@ -11,4 +11,15 @@
     <artifactId>angel-base</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.angel</groupId>
+            <artifactId>angel-util</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.angel</groupId>
+            <artifactId>angel-db</artifactId>
+        </dependency>
+    </dependencies>
 </project>

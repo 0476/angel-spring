@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.angel</groupId>
-    <artifactId>test</artifactId>
+    <artifactId>angel-test</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>test</name>
     <description>Demo project for Spring Boot</description>

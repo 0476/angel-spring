@@ -18,4 +18,22 @@
         <module>angel-db</module>
     </modules>
 
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>com.angel</groupId>
+                <artifactId>angel-util</artifactId>
+                <version>${angel-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.angel</groupId>
+                <artifactId>angel-db</artifactId>
+                <version>${angel-spring.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
 </project>
