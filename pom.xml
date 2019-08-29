@@ -62,7 +62,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
     </dependencies>
@@ -87,6 +87,12 @@
             <dependency>
                 <groupId>com.angel</groupId>
                 <artifactId>angel-util</artifactId>
+                <version>${angel-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.angel</groupId>
+                <artifactId>angel-static</artifactId>
                 <version>${angel-spring.version}</version>
             </dependency>
 
