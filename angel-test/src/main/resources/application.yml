@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: angel-test
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+server:
+  compression:
+    enabled: true
+    min-response-size: 10
+    excluded-user-agents: gozilla,traviata
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
