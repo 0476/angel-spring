@@ -16,6 +16,13 @@ public class TableController {
     @Autowired
     ITableService iTableService;
 
+
+    @RequestMapping("list")
+    public String page() {
+        return "view/code_gen/table_list";
+    }
+
+
     @RequestMapping("listTable")
     @ResponseBody
     public List<Map> listTable() {

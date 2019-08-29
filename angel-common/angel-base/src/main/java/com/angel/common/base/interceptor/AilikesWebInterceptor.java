@@ -24,7 +24,7 @@ public class AilikesWebInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //加入公用参数的
         String ctx = request.getServletContext().getContextPath();
-        Long version = System.currentTimeMillis();
+        Integer version = buildRandom(6);
         request.setAttribute("ctx",ctx);
         request.setAttribute("version",version);
         request.setAttribute("static",ctx);
@@ -47,4 +47,14 @@ public class AilikesWebInterceptor extends HandlerInterceptorAdapter {
         super.afterConcurrentHandlingStarted(request, response, handler);
     }
 
+    public static int buildRandom(int length) {
+        int num = 1;
+        double random = Math.random();
+        if (random < 0.1) {
+            random = random + 0.1;
+        } for (int i = 0; i < length; i++) {
+            num = num * 10;
+        }
+        return (int) ((random * num));
+    }
 }
