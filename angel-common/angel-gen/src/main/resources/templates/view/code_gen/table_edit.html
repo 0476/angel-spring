@@ -70,6 +70,12 @@
                     tableName:tableName
                     ,size:1000
                 }
+                ,beforeSend:function () {
+                    layer.load();
+                }
+                ,complete: function () {
+                    layer.closeAll('loading');
+                }
                 ,success:function(data){
                     TableEditApp.initTable(data.records);
                 }
@@ -157,7 +163,14 @@
         ,addColumn:function(){
             var oldData =  layui.table.cache["columnList"];
             // var data1={"IS_NULLABLE":"YES","COLUMN_NAME":"","COLUMN_KEY":"","COLUMN_DEFAULT":"","COLUMN_COMMENT":"请输入注释","COLUMN_TYPE":"varchar(255)","DATA_TYPE":"varchar"};
-            var data1={};
+            var data1={
+                columnComment: "请输入注释"
+                ,columnKey: ""
+                ,columnName: ""
+                ,columnType: "varchar(255)"
+                ,dataType: "varchar"
+                ,isNullable: "YES"
+            };
             console.log(oldData);
             oldData.push(data1);
             layui.table.reload('columnList',{data : oldData});
@@ -167,6 +180,11 @@
             // var oldData =  layui.table.cache["columnList"];
             // oldData.splice(obj.tr.data('index'),1);
             // layui.table.reload('columnList',{data : oldData});
+        }
+        ,doSave:function (callback) {
+            var oldData =  layui.table.cache["columnList"];
+            console.log(oldData);
+            //callback();
         }
     }
 </script>

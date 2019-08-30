@@ -78,6 +78,11 @@ var TableApp={
             ,area:['1000px','680px']
             ,content: '/table/tableEdit?tableName='+tableName
             ,btn:['确定','取消']
+            ,btn1:function(index,layero){
+                layero.find("iframe")[0].contentWindow.TableEditApp.doSave(function(data){
+                    layer.close(index);
+                });
+            }
         });
     }
     ,openDetailWindow:function (tableName) {
