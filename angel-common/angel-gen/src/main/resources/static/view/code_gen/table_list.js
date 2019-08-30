@@ -2,7 +2,7 @@ var TableApp={
     initTable:function(){
         layui.table.render({
             elem: '#tableList'
-            ,height: 'full-120'
+            ,height: 'full-90'
             ,url: '/table/listTable' //数据接口
             ,autoSort:false
             ,request:{
@@ -23,7 +23,7 @@ var TableApp={
                 ,{field: 'TABLE_SCHEMA', title: '数据库', width:180}
                 ,{field: 'TABLE_TYPE', title: '表类型', width:140}
                 ,{field: 'TABLE_COLLATION', title: '字符集', width: 100}
-                ,{field: 'ENGINE', title: '表引擎', width: 80},
+                ,{field: 'ENGINE', title: '表引擎', width: 80}
                 ,{field: 'TABLE_NAME', title: '表名', width:280}
                 ,{field: 'TABLE_COMMENT', title: '表说明'}
             ]]
