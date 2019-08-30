@@ -1,6 +1,9 @@
 package com.angel.common.gen.mapper;
 
+import com.angel.common.base.http.PageData;
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +23,7 @@ public interface TableMapper {
      * @description:查询表结构
      * @return
      */
-    List<Map> listTable();
+    PageData<Map> listTable(PageData page);
 
     /**
      * @description:查询表中的字段

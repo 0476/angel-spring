@@ -1,5 +1,8 @@
 package com.angel.common.gen.service;
 
+import com.angel.common.base.http.PageData;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,8 +17,7 @@ public interface ITableService {
      * @description:查询表结构
      * @return
      */
-    List<Map> listTable();
-
+    IPage<Map> listTable(PageData page);
     /**
      * @description:查询表中的字段
      * @param tableName

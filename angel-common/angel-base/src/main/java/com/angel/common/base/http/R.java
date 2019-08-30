@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class R implements Serializable {
 
-    private Integer code;
+    private Integer code = 0 ;
 
-    private String msg;
+    private String msg = "";
 
     public Integer getCode() {
         return code;

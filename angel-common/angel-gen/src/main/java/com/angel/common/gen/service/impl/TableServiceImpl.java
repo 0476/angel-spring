@@ -1,7 +1,10 @@
 package com.angel.common.gen.service.impl;
 
+import com.angel.common.base.http.PageData;
 import com.angel.common.gen.mapper.TableMapper;
 import com.angel.common.gen.service.ITableService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,8 @@ public class TableServiceImpl implements ITableService {
     private TableMapper tableMapper;
 
     @Override
-    public List<Map> listTable() {
-        return tableMapper.listTable();
+    public IPage<Map> listTable(PageData page) {
+        return tableMapper.listTable(page);
     }
 
     @Override

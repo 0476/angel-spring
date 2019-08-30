@@ -22,7 +22,7 @@
 <script src="${static}/plugin/layui/layui.js"></script>
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
+    layui.use(['element','table','form'], function(){
         var element = layui.element;
         $("#content-pane").load("${ctx}/table/list");
     });
