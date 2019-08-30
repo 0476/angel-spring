@@ -1,9 +1,29 @@
-<div>
+<!-- 工具栏模板  -->
+<script type="text/html" id="tableListToolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-green" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-blue" lay-event="update"><i class="layui-icon layui-icon-edit"></i>编辑</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-red" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
+<div class="layui-row" >
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">选择数据库</label>
+                <div class="layui-input-inline" >
+                    <select name="city" lay-verify="required" id="dataSource" lay-filter="dataSource">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-row">
     <table id="tableList" lay-filter="test"></table>
 </div>
 <script src="view/code_gen/table_list.js"></script>
 <script>
-    $(function(){
-        TableApp.initTable();
-    })
+
 </script>

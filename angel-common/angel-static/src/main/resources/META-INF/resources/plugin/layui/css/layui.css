@@ -1850,6 +1850,10 @@ a cite {
 }
 
 .layui-btn-radius {
+    border-radius: 5px
+}
+
+.layui-btn-cir {
     border-radius: 100px
 }
 
@@ -2020,7 +2024,8 @@ a cite {
 }
 
 .layui-form-item {
-    margin-bottom: 15px;
+    margin-top: 7px;
+    margin-bottom: 5px;
     clear: both;
     *zoom: 1
 }
@@ -2052,7 +2057,7 @@ a cite {
 }
 
 .layui-form-item .layui-inline {
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     margin-right: 10px
 }
 
@@ -2752,7 +2757,7 @@ a cite {
 }
 
 .layui-laypage select {
-    height: 22px;
+    height: 26px;
     padding: 3px;
     border-radius: 2px;
     cursor: pointer
@@ -3192,9 +3197,9 @@ a cite {
     position: relative;
     z-index: 890;
     width: 100%;
-    min-height: 50px;
-    line-height: 30px;
-    padding: 10px 15px;
+    min-height: 40px;
+    line-height: 20px;
+    padding: 10px 10px;
     border-width: 0 0 1px
 }
 
@@ -3266,7 +3271,7 @@ a cite {
 }
 
 .layui-table-page select {
-    height: 18px
+    height: 26px
 }
 
 .layui-table-patch .layui-table-cell {
