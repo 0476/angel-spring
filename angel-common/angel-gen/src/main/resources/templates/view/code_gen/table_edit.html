@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>代码生成</title>
+    <#include "/view/include/common_css.html">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!-- 工具栏模板  -->
+    <script type="text/html" id="columnListToolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-green" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
+        </div>
+    </script>
+    <script type="text/html" id="operationToolbar">
+        <button class="layui-btn layui-btn-inline layui-btn-radius layui-bg-red" lay-event="remove"><i class="layui-icon layui-icon-delete"></i></button>
+    </script>
+    <div class="layui-row layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">表名</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="price_min" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">表说明</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="password" name="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">字符集</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="password" name="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <table id="columnList" lay-filter="columnListFilter"></table>
+    </div>
+</div>
+<#include "/view/include/common_js.html">
+<script>
+    var tableName = "${tableName!''}";
+</script>
+<script src="${static}/view/code_gen/table_edit.js?_v=${version}"></script>
+</body>
+</html>
+<script>
+    $(function(){
+        layui.use(['element','table','form'], function(){
+            TableEditApp.init();
+        });
+    })
+    var TableEditApp={
+        /**
+         * 初始化
+         */
+        init:function(){
+            this.getData();
+        }
+        ,getData:function(){
+            $.ajax({
+                url: '/table/listTableColumn' //数据接口
+                ,data:{
+                    tableName:tableName
+                    ,size:1000
+                }
+                ,success:function(data){
+                    TableEditApp.initTable(data.records);
+                }
+            })
+        }
+        ,initTable:function(data){
+            layui.table.render({
+                elem: '#columnList'
+                ,height: 'full-40'
+                ,data:data
+                // ,url: '/table/listTableColumn' //数据接口
+                // ,where:{
+                //     tableName:tableName
+                // }
+                ,defaultToolbar: [ 'print', 'exports','filter']
+                ,toolbar: '#columnListToolbar'
+                ,autoSort:false
+                ,limit:200
+                ,page:false
+                ,request:{
+                    pageName:"current"
+                    ,limitName: "size"
+                }
+                ,response:{
+                    dataName:"records",
+                    countName:'total'
+                }
+                ,cols: [[ //表头
+                    {field: 'columnName', title: '选择',width:40, type:'checkbox'}
+                    ,{field: 'columnName', title: '字段名', width:180,edit:'text'}
+                    ,{field: 'columnKey', title: '约束', width:80,templet:function (d) {
+                            var html = '<select lay-ignore class="select-inline">';
+                                html = html + '<option value=""></option>'
+                                html = html + '<option value="PRI" '+(d.columnKey=='PRI'?'selected':'')+'>PRI</option>'
+                                html = html + '<option value="UNI" '+(d.columnKey=='UNI'?'selected':'')+'>UNI</option>'
+                                html = html + '<option value="MUL" '+(d.columnKey=='MUL'?'selected':'')+'>MUL</option>'
+                                html = html + '</select>'
+                            return html;
+                        }}
+                    ,{field: 'isNullable', title: '可为空', width:80,templet:function (d) {
+                            var html = '<select lay-ignore class="select-inline">';
+                            html = html + '<option value="YES" '+(d.isNullable=='YES'?'selected':'')+'>YES</option>'
+                            html = html + '<option value="NO" '+(d.isNullable=='NO'?'selected':'')+'>NO</option>'
+                            html = html + '</select>'
+                            return html;
+                        }}
+                    ,{field: 'columnDefault', title: '默认值', width:100,edit:'text'}
+                    ,{field: 'columnType', title: '字段类型', width: 120,edit:'text'}
+                    ,{field: 'dataType', title: '数据类型', width: 100,edit:'text'}
+                    ,{field: 'columnComment', title: '字段说明',edit:'text'}
+                    ,{field: '', title: '操作',width: 60,templet:'#operationToolbar'}
+                ]]
+                ,done: function(res, curr, count) {
+                    TableEditApp.initTableListToolbarListener();
+                }
+            });
+        }
+        ,initTableListToolbarListener:function () {
+            //监听事件
+            layui.table.on('toolbar(columnListFilter)', function(obj){
+                var checkStatus = layui.table.checkStatus(obj.config.id); //idTest 即为基础参数 id 对应的值
+                switch(obj.event){
+                    case 'add':
+                        TableEditApp.addColumn();
+                        break;
+                };
+            });
+            //监听行事件
+            layui.table.on('tool(columnListFilter)', function(obj){
+                var data = obj.data; //获得当前行数据
+                switch(obj.event){
+                    case 'remove':
+                        TableEditApp.delColumn(obj);
+                        break;
+                };
+            });
+            layui.table.on('edit(columnListFilter)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+                console.log(obj.value); //得到修改后的值
+                console.log(obj.field); //当前编辑的字段名
+                console.log(obj.data); //所在行的所有相关数据
+                // var oldData =  layui.table.cache["columnList"];
+                // layui.table.reload('columnList',{data : oldData});
+            });
+        }
+        ,addColumn:function(){
+            var oldData =  layui.table.cache["columnList"];
+            // var data1={"IS_NULLABLE":"YES","COLUMN_NAME":"","COLUMN_KEY":"","COLUMN_DEFAULT":"","COLUMN_COMMENT":"请输入注释","COLUMN_TYPE":"varchar(255)","DATA_TYPE":"varchar"};
+            var data1={};
+            console.log(oldData);
+            oldData.push(data1);
+            layui.table.reload('columnList',{data : oldData});
+        }
+        ,delColumn:function(obj){
+            obj.del();
+            // var oldData =  layui.table.cache["columnList"];
+            // oldData.splice(obj.tr.data('index'),1);
+            // layui.table.reload('columnList',{data : oldData});
+        }
+    }
+</script>

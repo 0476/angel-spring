@@ -3,12 +3,14 @@
     <div class="layui-btn-container layui-form">
         <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-green" lay-event="genCode"><i class="layui-icon layui-icon-component"></i>生成代码</button>
         <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-green" lay-event="addTable"><i class="layui-icon layui-icon-add-1"></i>创建表</button>
-        <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-blue" lay-event="updateTable"><i class="layui-icon layui-icon-edit"></i>编辑表</button>
-        <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-red" lay-event="deleteTable"><i class="layui-icon layui-icon-delete"></i>删除表</button>
     </div>
 </script>
 <script type="text/html" id="titleToolbar">
     <a href="javascript:void(0)"  class="layui-table-link" lay-event="queryDetail" >{{d.TABLE_NAME}}</a>
+</script>
+<script type="text/html" id="operationToolbar">
+    <button class="layui-btn layui-btn-inline layui-btn-radius layui-bg-blue" lay-event="updateTable"><i class="layui-icon layui-icon-edit"></i></button>
+    <button class="layui-btn layui-btn-inline layui-btn-radius layui-bg-red" lay-event="deleteTable"><i class="layui-icon layui-icon-delete"></i></button>
 </script>
 <div class="layui-row" >
     <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-form">

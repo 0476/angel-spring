@@ -50,12 +50,6 @@ var TableApp={
                 case 'addTable':
                     layer.msg('添加');
                     break;
-                case 'deleteTable':
-                    layer.msg('删除');
-                    break;
-                case 'updateTable':
-                    layer.msg('编辑');
-                    break;
             };
         });
         //监听行事件
@@ -65,11 +59,26 @@ var TableApp={
                 case 'queryDetail':
                     TableApp.openDetailWindow(data['TABLE_NAME']);
                     break;
+                case 'deleteTable':
+                    layer.msg('删除');
+                    break;
+                case 'updateTable':
+                    TableApp.openTableEditWindow(data['TABLE_NAME']);
+                    break;
             };
         });
     }
     ,openGenWindow:function (tableName) {
         layer.msg('代码生成面板：'+tableName);
+    }
+    ,openTableEditWindow:function (tableName) {
+        var index = layer.open({
+            title:'表结构编辑'
+            ,type:2
+            ,area:['1000px','680px']
+            ,content: '/table/tableEdit?tableName='+tableName
+            ,btn:['确定','取消']
+        });
     }
     ,openDetailWindow:function (tableName) {
         var index = layer.open({
@@ -124,6 +133,7 @@ var TableApp={
                 ,{field: 'TABLE_COLLATION', title: '字符集', width: 140}
                 ,{field: 'ENGINE', title: '表引擎', width: 80}
                 ,{field: 'TABLE_COMMENT', title: '表说明'}
+                ,{field: 'TABLE_NAME', title: '操作',width:120,templet:'#operationToolbar'}
             ]]
             ,done: function(res, curr, count) {
                 TableApp.initTableListToolbarListener();

@@ -21,7 +21,7 @@ var TableColumnApp={
             }
             ,defaultToolbar: [ 'print', 'exports','filter']
             // ,toolbar: 'default'
-            ,toolbar: '#columnListToolbar'
+            ,toolbar: false
             ,autoSort:false
             ,limit:10
             ,request:{
@@ -40,17 +40,16 @@ var TableColumnApp={
                 ,last: '末页'
             }
             ,cols: [[ //表头
-                 {field: 'TABLE_NAME', title: '选择',width:40, type:'radio'}
-                ,{field: 'TABLE_SCHEMA', title: '数据库', width:80}
-                ,{field: 'TABLE_NAME', title: '表名', width:100}
-                ,{field: 'COLUMN_NAME', title: '字段名', width:180}
-                ,{field: 'COLUMN_KEY', title: '约束', width:80}
-                ,{field: 'COLUMN_TYPE', title: '字段类型', width: 140}
-                ,{field: 'DATA_TYPE', title: '数据类型', width: 100}
-                ,{field: 'COLUMN_COMMENT', title: '字段说明'}
+                ,{field: 'columnName', title: '字段名', width:180}
+                ,{field: 'columnKey', title: '约束', width:80}
+                ,{field: 'isNullable', title: '可为空', width:80}
+                ,{field: 'columnDefault', title: '默认值', width:100}
+                ,{field: 'columnType', title: '字段类型', width: 120}
+                ,{field: 'dataType', title: '数据类型', width: 100}
+                ,{field: 'columnComment', title: '字段说明'}
             ]]
             ,done: function(res, curr, count) {
-                TableApp.initTableListToolbarListener();
+
             }
         });
     }
