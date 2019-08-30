@@ -23,6 +23,6 @@ public interface ITableService {
      * @param tableName
      * @return
      */
-    List<Map> listTableColumn(@Param("tableName") String tableName);
+    IPage<Map> listTableColumn(PageData page,@Param("tableName") String tableName);
 
 }

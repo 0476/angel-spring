@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>代码生成</title>
+    <#include "/view/include/common_css.html">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!-- 工具栏模板  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/html" id="columnListToolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-green" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
+            <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-blue" lay-event="update"><i class="layui-icon layui-icon-edit"></i>编辑</button>
+            <button class="layui-btn layui-btn-sm layui-btn-radius layui-bg-red" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>删除</button>
+        </div>
+    </script>
+    <script type="text/html" id="titleToolbar">
+        <a href="javascript:void(0)"  class="layui-table-link" lay-event="queryDetail" >{{d.TABLE_NAME}}</a>
+    </script>
+    <div class="layui-row">
+        <table id="columnList" lay-filter="columnListFilter"></table>
+    </div>
+</div>
+<#include "/view/include/common_js.html">
+<script>
+    var tableName = "${tableName!''}";
+</script>
+<script src="${static}/view/code_gen/column_list.js?_v=${version}"></script>
+</body>
+</html>

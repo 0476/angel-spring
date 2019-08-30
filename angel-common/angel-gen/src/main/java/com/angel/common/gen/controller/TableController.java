@@ -1,5 +1,6 @@
 package com.angel.common.gen.controller;
 
+import com.angel.common.base.controller.BaseController;
 import com.angel.common.base.http.PageData;
 import com.angel.common.gen.service.ITableService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -8,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("table")
-public class TableController {
+public class TableController extends BaseController {
 
     @Autowired
     ITableService iTableService;
@@ -22,6 +25,11 @@ public class TableController {
     @RequestMapping("list")
     public String page() {
         return "view/code_gen/table_list";
+    }
+
+    @RequestMapping("listColumn")
+    public ModelAndView listColumnPage(String tableName) {
+        return mav("view/code_gen/column_list").addObject("tableName",tableName);
     }
 
 
@@ -33,7 +41,7 @@ public class TableController {
 
     @RequestMapping("listTableColumn")
     @ResponseBody
-    public List<Map> listTableColumn(String tableName) {
-        return iTableService.listTableColumn(tableName);
+    public IPage<Map> listTableColumn(PageData page,String tableName) {
+        return iTableService.listTableColumn(page,tableName);
     }
 }

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>代码生成器</title>
-    <link rel="stylesheet" href="${static}/plugin/layui/css/layui.css">
+    <title>代码生成</title>
+    <#include "/view/include/common_css.html">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -15,17 +15,10 @@
     </div>
     <#include "/view/include/footer.html">
 </div>
-<script src="${static}/jquery/jquery-3.3.1.min.js"></script>
-<script src="${static}/jquery/jquery.serializejson.min.js"></script>
-<script src="${static}/jquery/jquery.cookie.js"></script>
-<script src="${static}/plugin/layui/layui.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use(['element','table','form'], function(){
-        var element = layui.element;
-        $("#content-pane").load("${ctx}/table/list");
-    });
-</script>
+<#include "/view/include/common_js.html">
 <script language="javascript" src="${static}/common/js/index.js?_v=${version}"></script>
+<script>
+    $("#content-pane").load("${ctx}/table/list");
+</script>
 </body>
 </html>

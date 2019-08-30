@@ -23,12 +23,12 @@ public interface TableMapper {
      * @description:查询表结构
      * @return
      */
-    PageData<Map> listTable(PageData page);
+    IPage<Map> listTable(PageData page);
 
     /**
      * @description:查询表中的字段
      * @param tableName
      * @return
      */
-    List<Map> listTableColumn(@Param("tableName") String tableName);
+    IPage<Map> listTableColumn(PageData page,@Param("tableName") String tableName);
 }

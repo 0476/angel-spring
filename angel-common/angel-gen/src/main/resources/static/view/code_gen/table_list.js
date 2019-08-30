@@ -1,10 +1,18 @@
 $(function(){
-    TableApp.init();
+    layui.use(['element','table','form'], function(){
+        TableApp.init();
+    });
 })
 var TableApp={
+    /**
+     * 初始化
+     */
     init:function(){
         this.initForm();
     }
+    /**
+     * 初始化表单
+     */
     ,initForm:function(){
         $.ajax({
             url:'/dataSource/get'
@@ -15,17 +23,64 @@ var TableApp={
                 });
                 $("#dataSource").html(optionHtml);
                 layui.form.render();
-                TableApp.initDataSourcsListener();
-                TableApp.setDataSoource($("#dataSource").val());
+                TableApp.initDataSourceListener();
+                TableApp.setDataSource($("#dataSource").val());
             }
         });
     }
-    ,initDataSourcsListener:function () {
+    ,initDataSourceListener:function () {
         layui.form.on('select(dataSource)', function(data){
-            TableApp.setDataSoource(data.value);
+            TableApp.setDataSource(data.value);
         });
     }
-    ,setDataSoource:function(dataSource){
+    ,initTableListToolbarListener:function () {
+        //监听事件
+        layui.table.on('toolbar(tableListFilter)', function(obj){
+            console.log(obj);
+            var checkStatus = layui.table.checkStatus(obj.config.id); //idTest 即为基础参数 id 对应的值
+            console.log(checkStatus.data) //获取选中行的数据
+            switch(obj.event){
+                case 'genCode':
+                    if(checkStatus.data == null || checkStatus.data.length == 0){
+                        layer.msg('请选择表');
+                    }else{
+                        TableApp.openGenWindow(checkStatus.data[0]['TABLE_NAME']);
+                    }
+                    break;
+                case 'addTable':
+                    layer.msg('添加');
+                    break;
+                case 'deleteTable':
+                    layer.msg('删除');
+                    break;
+                case 'updateTable':
+                    layer.msg('编辑');
+                    break;
+            };
+        });
+        //监听行事件
+        layui.table.on('tool(tableListFilter)', function(obj){
+            var data = obj.data; //获得当前行数据
+            switch(obj.event){
+                case 'queryDetail':
+                    TableApp.openDetailWindow(data['TABLE_NAME']);
+                    break;
+            };
+        });
+    }
+    ,openGenWindow:function (tableName) {
+        layer.msg('代码生成面板：'+tableName);
+    }
+    ,openDetailWindow:function (tableName) {
+        var index = layer.open({
+             title:'表详情'
+            ,type:2
+            ,area:['1000px','680px']
+            ,content: '/table/listColumn?tableName='+tableName
+            ,btn:['关闭']
+        });
+    }
+    ,setDataSource:function(dataSource){
         $.ajax({
             url:'/dataSource/set'
             ,data:{
@@ -62,15 +117,17 @@ var TableApp={
                 ,last: '末页'
             }
             ,cols: [[ //表头
-                 {field: 'TABLE_NAME', title: '选择', type:'radio'}
-                ,{field: 'TABLE_NAME', title: '表名', width:280}
-                ,{field: 'TABLE_CATALOG', title: '表目录', width:80}
+                 {field: 'TABLE_NAME', title: '选择', width:40,type:'radio'}
+                ,{field: 'TABLE_NAME', title: '表名', width:280,templet: '#titleToolbar'}
                 ,{field: 'TABLE_SCHEMA', title: '数据库', width:180}
                 ,{field: 'TABLE_TYPE', title: '表类型', width:140}
                 ,{field: 'TABLE_COLLATION', title: '字符集', width: 140}
                 ,{field: 'ENGINE', title: '表引擎', width: 80}
                 ,{field: 'TABLE_COMMENT', title: '表说明'}
             ]]
+            ,done: function(res, curr, count) {
+                TableApp.initTableListToolbarListener();
+            }
         });
     }
 }

@@ -23,7 +23,7 @@ public class TableServiceImpl implements ITableService {
     }
 
     @Override
-    public List<Map> listTableColumn(String tableName) {
-        return tableMapper.listTableColumn(tableName);
+    public IPage<Map> listTableColumn(PageData page,String tableName) {
+        return tableMapper.listTableColumn(page,tableName);
     }
 }
