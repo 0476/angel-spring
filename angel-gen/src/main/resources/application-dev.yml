@@ -1,0 +1,127 @@
+logging:
+  config: classpath:logback.xml
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mappers/**/*.xml
+  type-aliases-package: com.angel.common.*.entity
+server:
+  port: 8000
+  servlet:
+    contextPath: /
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        loginUsername: admin
+        loginPassword: ppzAdmin
+    dynamic:
+      druid:
+        filters: stat,wall
+        stat:
+          merge-sql: true
+          log-slow-sql: true
+          slow-sql-millis: 5000
+        useGlobalDataSourceStat: true
+      p6spy: true # 默认false,建议线上关闭。
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+        master_1:
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/angel-spring?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+          username: angel-spring
+          password: angel-spring@123
+          # 初始化大小，最小，最大
+          initialSize: 5
+          maxActive: 500
+          maxPoolPreparedStatementPerConnectionSize: 20
+          # 配置获取连接等待超时的时间
+          maxWait: 60000
+          # 配置一个连接在池中最小生存的时间，单位是毫秒
+          minEvictableIdleTimeMillis: 300000
+          minIdle: 5
+          # 打开PSCache，并且指定每个连接上PSCache的大小
+          poolPreparedStatements: true
+          testOnBorrow: false
+          testOnReturn: false
+          testWhileIdle: true
+          # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+          timeBetweenEvictionRunsMillis: 60000
+          validationQuery: SELECT 1 FROM DUAL
+        slave_1:
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/angel-spring?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+          username: angel-spring
+          password: angel-spring@123
+          # 初始化大小，最小，最大
+          initialSize: 5
+          maxActive: 500
+          maxPoolPreparedStatementPerConnectionSize: 20
+          # 配置获取连接等待超时的时间
+          maxWait: 60000
+          # 配置一个连接在池中最小生存的时间，单位是毫秒
+          minEvictableIdleTimeMillis: 300000
+          minIdle: 5
+          # 打开PSCache，并且指定每个连接上PSCache的大小
+          poolPreparedStatements: true
+          testOnBorrow: false
+          testOnReturn: false
+          testWhileIdle: true
+          # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+          timeBetweenEvictionRunsMillis: 60000
+          validationQuery: SELECT 1 FROM DUAL
+        bjtu_pams_local_1:
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/bjtu_pams_local?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+          username: angel-spring
+          password: angel-spring@123
+          # 初始化大小，最小，最大
+          initialSize: 5
+          maxActive: 500
+          maxPoolPreparedStatementPerConnectionSize: 20
+          # 配置获取连接等待超时的时间
+          maxWait: 60000
+          # 配置一个连接在池中最小生存的时间，单位是毫秒
+          minEvictableIdleTimeMillis: 300000
+          minIdle: 5
+          # 打开PSCache，并且指定每个连接上PSCache的大小
+          poolPreparedStatements: true
+          testOnBorrow: false
+          testOnReturn: false
+          testWhileIdle: true
+          # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+          timeBetweenEvictionRunsMillis: 60000
+          validationQuery: SELECT 1 FROM DUAL
+#是否开启接口文档
+swagger:
+  enable: true
+
+# Configure the Authorization Server and User Info Resource Server details
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:7070/usercenter/oauth/token
+      userAuthorizationUri: http://localhost:7070/usercenter/oauth/authorize
+      clientId: second
+      clientSecret: passwordforauthserver
+    resource:
+      userInfoUri: http://localhost:7070/usercenter/user
+
+person:
+  url: http://localhost:9000/person
+
+# Proxies the calls to http://localhost:8081/api/* to our REST service at http://localhost:9000/*
+# and automatically includes our OAuth2 token in the request headers
+#zuul:
+#  routes:
+#    resource:
+#      path: /api/**
+#      url: http://localhost:9000
+#    user:
+#      path: /user/**
+#      url: http://localhost:9000/user
+#
+## Make sure the OAuth2 token is only relayed when using the internal API,
+## do not pass any authentication to the external API
+#proxy:
+#  auth:
+#    routes:
+#      api: oauth2

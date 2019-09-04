@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: angel-gen
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  main:
+    allow-bean-definition-overriding: true
+  freemarker:
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    request-context-attribute: req
+    suffix: .html
+    template-loader-path: classpath:/templates
+    settings:
+      number_format: 0.##
+#  resources:
+#    static-locations: classpath*:/META-INF/resources/,classpath*:/resources/,classpath*:/static/,classpath*:/public/
+server:
+  compression:
+    enabled: true
+    min-response-size: 10
+    excluded-user-agents: gozilla,traviata
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
