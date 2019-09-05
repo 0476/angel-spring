@@ -72,8 +72,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.csrf();
         // 基于token，所以不需要session  如果基于session 则表使用这段代码
         http
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 //对请求进行认证  url认证配置顺序为：1.先配置放行不需要认证的 permitAll() 2.然后配置 需要特定权限的 hasRole() 3.最后配置 anyRequest().authenticated()
                 .authorizeRequests()
                 // 对于获取token的rest api要允许匿名访问
