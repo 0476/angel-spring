@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Free deadlink 404 for Website Template | Home :: w3layouts</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href='http://fonts.googleapis.com/css?family=Metal+Mania' rel='stylesheet' type='text/css'>
+	<script src="${staticPath!''}/js/jquery-1.9.1.min.js?v=${version}"></script>
+	<link type="text/css" href="${staticPath!''}/css/error.css" rel="stylesheet" />
+	<script language="JavaScript">
+		var t = 5;
+		function fun() {
+			console.log(t);
+			t--;
+			$("#clock").html(t);
+			if(t <= 0) {
+				// location.href = "${ctx}/tologin";
+				clearInterval(inter);
+			}
+		}
+		var inter = setInterval("fun()", 1000);
+	</script>
+</head>
+
+
+<body>
+<div class="wrap">
+	<div class="logo">
+		<h1>401&nbsp;(<span id="clock">5</span>)</h1>
+		<p>很抱歉，登录状态已失效</p>
+		<div class="sub">
+			<p><a href="${ctx!''}/page/tologin">立即去登录</a></p>
+		</div>
+	</div>
+</div>
+
+</body>
