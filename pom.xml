@@ -20,6 +20,7 @@
         <module>angel-common</module>
         <module>angel-test</module>
         <module>angel-gen</module>
+        <module>angel-web</module>
     </modules>
     <properties>
         <angel-spring.version>1.0.0-SNAPSHOT</angel-spring.version>
