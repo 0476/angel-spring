@@ -3,7 +3,7 @@ import qs from 'qs'
 
 axios.defaults.timeout = 5000;                        //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';        //配置请求头
-axios.defaults.baseURL =  "";   //配置接口地址
+axios.defaults.baseURL =  process.env.BASE_URL;   //配置接口地址
 
 //POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
@@ -31,6 +31,8 @@ axios.interceptors.response.use((res) =>{
 
 //返回一个Promise(发送post请求)
 export function post(url, params) {
+  console.log(url);
+  console.log(params);
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then(response => {
