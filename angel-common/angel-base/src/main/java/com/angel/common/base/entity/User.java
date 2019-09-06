@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 /**
@@ -29,6 +30,8 @@ public class User implements UserDetails, Serializable {
   private String password;
 
   private List<Role> authorities;
+
+  private Instant lastPasswordResetDate;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -83,5 +86,13 @@ public class User implements UserDetails, Serializable {
 
   public void setAuthorities(List<Role> authorities) {
     this.authorities = authorities;
+  }
+
+  public Instant getLastPasswordResetDate() {
+    return lastPasswordResetDate;
+  }
+
+  public void setLastPasswordResetDate(Instant lastPasswordResetDate) {
+    this.lastPasswordResetDate = lastPasswordResetDate;
   }
 }

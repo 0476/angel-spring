@@ -35,7 +35,7 @@ public class UserDetailService {
 //      throw new RuntimeException("用户密码不对");
 //    }
 
-    JWT jwt = authServiceClient.getToken("Basic dXNlci1zZXJ2aWNlOjEyMzQ1Ng==","password", username, password);
+    JWT jwt = authServiceClient.getToken("user-service","123456","password","service",username, password);
     if (jwt == null) {
       throw new RuntimeException("用户token有问题");
     }

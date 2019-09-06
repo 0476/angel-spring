@@ -11,8 +11,13 @@ public class AuthServiceHystrix implements AuthServiceClient {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
   @Override
-  public JWT getToken(String authorization, String grantType, String username, String password) {
-    logger.error("获取JWT Token失败, authorization: {}, grantType: {}, username: {}, password: {}",authorization, grantType, username, password);
+  public JWT getToken( String client_id
+          ,String client_secret
+          ,String grantType
+          ,String scope
+          ,String username
+          ,String password) {
+    logger.error("获取JWT Token失败, client_id: {}, grantType: {}, username: {}, password: {}",client_id, grantType, username, password);
     return null;
   }
 

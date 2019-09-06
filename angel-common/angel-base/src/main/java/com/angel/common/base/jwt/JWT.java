@@ -17,9 +17,11 @@ public class JWT implements Serializable {
 
   private String scope;
 
+  private int expires_in;
+
   private String jti;
 
-  private int expires_in;
+  private String userId;
 
   public String getAccess_token() {
     return access_token;
@@ -53,19 +55,27 @@ public class JWT implements Serializable {
     this.scope = scope;
   }
 
-  public String getJti() {
-    return jti;
-  }
-
-  public void setJti(String jti) {
-    this.jti = jti;
-  }
-
   public int getExpires_in() {
     return expires_in;
   }
 
   public void setExpires_in(int expires_in) {
     this.expires_in = expires_in;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public String getJti() {
+    return jti;
+  }
+
+  public void setJti(String jti) {
+    this.jti = jti;
   }
 }
