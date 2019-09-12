@@ -1,0 +1,22 @@
+server:
+  port: 10080
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: angel-gateway-service
+  redis:
+    host: 111.207.248.47
+    port: 16379
+  cloud:
+    gateway:
+      routes:
+        - id: header_route
+          uri: http://10.0.29.187:8080/
+          predicates:
+            - Header=X-Request-Id, \d+
+        - id: query_route
+          uri: http://10.0.29.187:8080/
+          predicates:
+            - Query=baz
+

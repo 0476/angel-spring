@@ -11,8 +11,9 @@
     <name>angel-service</name>
     <packaging>pom</packaging>
     <modules>
-        <module>angel-auth-service</module>
         <module>angel-eureka-service</module>
+        <module>angel-gateway-service</module>
+        <module>angel-auth-service</module>
         <module>angel-user-service</module>
     </modules>
 
