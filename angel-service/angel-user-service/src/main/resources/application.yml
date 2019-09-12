@@ -1,7 +1,12 @@
 server:
   port: 9090
+  session:
+    cookie:
+      name: USERSESSION
   servlet:
     contextPath: /
+  application:
+    name: user-service
 mybatis-plus:
   mapper-locations: classpath:mybatis/mappers/**/*.xml
   type-aliases-package: com.angel.common.*.entity
@@ -12,18 +17,10 @@ spring:
     name: user-service
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
-  freemarker:
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
     cache: false
-    charset: UTF-8
-    check-template-location: true
-    content-type: text/html
-    expose-request-attributes: false
-    expose-session-attributes: false
-    request-context-attribute: req
-    suffix: .html
-    template-loader-path: classpath:/templates
-    settings:
-      number_format: 0.##
 eureka:
   instance:
     hostname: localhost
@@ -35,3 +32,19 @@ eureka:
 feign:
   hystrix:
     enabled: true
+security:
+  basic:
+    enabled: false
+  headers:
+    frame: true
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:2000/oauth/token
+      authorized-grant-types: authorization_code,refresh_token
+      clientAuthenticationScheme: header
+      clientId: curl_client
+      clientSecret: user
+      useCurrentUri: true
+      userAuthorizationUri: http://localhost:2000/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:2000/user

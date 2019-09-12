@@ -10,11 +10,14 @@
     <artifactId>angel-service</artifactId>
     <name>angel-service</name>
     <packaging>pom</packaging>
+
     <modules>
         <module>angel-eureka-service</module>
         <module>angel-gateway-service</module>
         <module>angel-auth-service</module>
+        <module>angel-resource-service</module>
         <module>angel-user-service</module>
+
     </modules>
 
 </project>
