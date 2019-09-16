@@ -2,14 +2,11 @@ package com.angel.common.base.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 
 /**
  * 功能描述:公共拦截器
@@ -18,23 +15,14 @@ import java.util.Enumeration;
  * @version 1.0.0
  * @date 19-6-11 17:26
  */
-public class AilikesWebInterceptor extends HandlerInterceptorAdapter {
+public class AilikesOauthInterceptor extends HandlerInterceptorAdapter {
 
-    private static Logger logger = LoggerFactory.getLogger(AilikesWebInterceptor.class);
+    private static Logger logger = LoggerFactory.getLogger(AilikesOauthInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //加入公用参数的
-        String ctx = request.getServletContext().getContextPath();
-        Enumeration<String>  headers = request.getHeaderNames();
-        logger.info("当前请求URL{}",request.getRequestURL());
-        while (headers.hasMoreElements()){
-            logger.debug("当前请求Header:{}",headers.nextElement() );
-        }
-        Integer version = buildRandom(6);
-        request.setAttribute("ctx",ctx);
-        request.setAttribute("version",version);
-        request.setAttribute("static",ctx);
+        //获取参数code
+        String code = request.getParameter("code");
 
         return true;
     }

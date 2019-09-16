@@ -1,24 +1,28 @@
 package com.angel.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-
+@RequestMapping
 public class CoreController<T> {
 
     @Autowired
     private TokenStore tokenStore;
 
-    @RequestMapping("/user")
+    @RequestMapping(path = "/user",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Map<String, Object> user(@RequestHeader String authorization) {
         //必须通过客户端{携带的token在服务端的token存储中获取用户信息。
@@ -42,6 +46,30 @@ public class CoreController<T> {
         map.put("authorities", authen.getAuthorities());
         return map;
 
+    }
+
+    @RequestMapping("/hi")
+    @ResponseBody
+    public String hi() {
+        return "hi, 你好";
+    }
+
+    @RequestMapping("/hello")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String hello() {
+        return "hello, 你好";
+    }
+
+    @RequestMapping("/getPrincipal")
+    public OAuth2Authentication getPrincipal(OAuth2Authentication oAuth2Authentication,
+                                             Principal principal,
+                                             Authentication authentication) {
+        System.out.println("=============================================");
+        System.out.println(oAuth2Authentication);
+        System.out.println(principal);
+        System.out.println(authentication);
+        System.out.println("=============================================");
+        return oAuth2Authentication;
     }
 
 }

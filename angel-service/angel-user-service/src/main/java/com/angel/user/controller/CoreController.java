@@ -15,7 +15,7 @@ public class CoreController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
         System.out.println("index");
-        return "/index";
+        return "index";
     }
 
 

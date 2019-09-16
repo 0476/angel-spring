@@ -1,10 +1,10 @@
 server:
   port: 9090
-  session:
-    cookie:
-      name: USERSESSION
   servlet:
     contextPath: /
+    session:
+      cookie:
+        name: USERSESSION
   application:
     name: user-service
 mybatis-plus:
@@ -19,8 +19,18 @@ spring:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   main:
     allow-bean-definition-overriding: true
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
   thymeleaf:
     cache: false
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
 eureka:
   instance:
     hostname: localhost
@@ -33,18 +43,20 @@ feign:
   hystrix:
     enabled: true
 security:
-  basic:
-    enabled: false
-  headers:
-    frame: true
   oauth2:
+    sso:
+      login-path: /login
     client:
-      accessTokenUri: http://localhost:2000/oauth/token
-      authorized-grant-types: authorization_code,refresh_token
+      accessTokenUri: http://127.0.0.1:2000/auth/oauth/token
+      authorized-grant-types: authorization_code,password,refresh_token,implicit,client_credentials
       clientAuthenticationScheme: header
       clientId: curl_client
       clientSecret: user
+      scope: read,write
       useCurrentUri: true
-      userAuthorizationUri: http://localhost:2000/oauth/authorize
+      userAuthorizationUri: http://127.0.0.1:2000/auth/oauth/authorize
     resource:
-      userInfoUri: http://localhost:2000/user
+      id: product_api
+      userInfoUri: http://127.0.0.1:2000/auth/user
+    authorization:
+      check-token-access: http://127.0.0.1:2000/auth/oauth/check_token

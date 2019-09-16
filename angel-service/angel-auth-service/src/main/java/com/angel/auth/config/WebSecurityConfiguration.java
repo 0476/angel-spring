@@ -15,7 +15,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
-@Order(101)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
@@ -38,10 +37,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic().disable();
+        http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/login","/logout.do").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/user","/login","/login.do","/logout.do","/oauth/authorize").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login.do")
@@ -52,7 +53,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))
                 .and()
-                .userDetailsService(userDetailsServiceBean());
+                .userDetailsService(userDetailsServiceBean())
+                ;
     }
 
     @Override
