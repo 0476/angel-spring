@@ -50,7 +50,7 @@ security:
       accessTokenUri: http://127.0.0.1:2000/auth/oauth/token
       authorized-grant-types: authorization_code,password,refresh_token,implicit,client_credentials
       clientAuthenticationScheme: header
-      clientId: curl_client
+      clientId: user-service
       clientSecret: user
       scope: read,write
       useCurrentUri: true

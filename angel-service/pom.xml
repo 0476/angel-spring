@@ -17,6 +17,7 @@
         <module>angel-auth-service</module>
         <module>angel-resource-service</module>
         <module>angel-user-service</module>
+        <module>angel-message-service</module>
 
     </modules>
 
