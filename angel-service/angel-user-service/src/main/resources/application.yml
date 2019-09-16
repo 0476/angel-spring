@@ -2,9 +2,9 @@ server:
   port: 9090
   servlet:
     contextPath: /
-    session:
-      cookie:
-        name: USERSESSION
+#    session:
+#      cookie:
+#        name: USERSESSIONID
   application:
     name: user-service
 mybatis-plus:
