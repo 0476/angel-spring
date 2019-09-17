@@ -10,6 +10,12 @@ spring:
     port: 16379
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+        - AddResponseHeader=X-Response-Default-Foo, Default-Bar
       routes:
         - id: message
           uri: http://localhost:8080
