@@ -47,16 +47,17 @@ security:
     sso:
       login-path: /login
     client:
-      accessTokenUri: http://127.0.0.1:2000/auth/oauth/token
+      accessTokenUri: http://localhost:2000/auth/oauth/token
       authorized-grant-types: authorization_code,password,refresh_token,implicit,client_credentials
       clientAuthenticationScheme: header
       clientId: user-service
       clientSecret: user
       scope: read,write
       useCurrentUri: true
-      userAuthorizationUri: http://127.0.0.1:2000/auth/oauth/authorize
+      userAuthorizationUri: http://localhost:2000/auth/oauth/authorize
+      logoutUri: http://localhost:2000/auth/oauth/logout
     resource:
       id: product_api
-      userInfoUri: http://127.0.0.1:2000/auth/user
+      userInfoUri: http://localhost:2000/auth/user
     authorization:
-      check-token-access: http://127.0.0.1:2000/auth/oauth/check_token
+      check-token-access: http://localhost:2000/auth/oauth/check_token
