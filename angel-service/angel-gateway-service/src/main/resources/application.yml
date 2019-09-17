@@ -11,12 +11,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: header_route
-          uri: http://10.0.29.187:8080/
+        - id: message
+          uri: http://localhost:8080
           predicates:
-            - Header=X-Request-Id, \d+
-        - id: query_route
-          uri: http://10.0.29.187:8080/
+            - Path=/message/{path}
+          filters:
+            # 访问localhost:10080/message, 请求会转发到localhost:8080
+            - RewritePath=/message, /
+        - id: user
+          uri: http://localhost:9090
           predicates:
-            - Query=baz
+            - Path=/user/{path}
+          filters:
+            # 访问localhost:10080/user, 请求会转发到localhost:8080
+            - RewritePath=/user, /
 
