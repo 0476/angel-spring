@@ -4,9 +4,9 @@ server:
     uri-encoding: UTF-8
   servlet:
     contextPath: /auth
-#    session:
-#      cookie:
-#        name: AUTHSESSIONID
+    session:
+      cookie:
+        name: AUTHSESSIONID
 mybatis-plus:
   mapper-locations: classpath:mybatis/mappers/**/*.xml
   type-aliases-package: com.angel.common.*.entity
