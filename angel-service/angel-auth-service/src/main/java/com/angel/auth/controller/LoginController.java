@@ -33,7 +33,6 @@ public class LoginController {
     @RequestMapping("/")
     public ModelAndView root(Map<String,Object> model, Principal principal){
 
-
         List<Approval> approvals=clientDetailsService.listClientDetails().stream()
                 .map(clientDetails -> approvalStore.getApprovals(principal.getName(),clientDetails.getClientId()))
                 .flatMap(Collection::stream)

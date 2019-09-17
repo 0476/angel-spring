@@ -1,23 +1,21 @@
 package com.angel.auth.config;
 
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import com.angel.auth.service.JdbcUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
@@ -28,7 +26,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception {
-        return new JdbcUserDetails();
+        return new JdbcUserDetailsServiceImpl();
     }
 
     @Override
@@ -43,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/user","/login","/login.do","/oauth/logout","/logout.do","/oauth/authorize").permitAll()
+                .antMatchers("/user","/login","/login.do","/oauth/login","/oauth/logout","/logout.do","/oauth/authorize").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -52,20 +50,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .loginPage("/login")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/oauth/logout").permitAll()
-//                .logoutSuccessHandler(
-//                        (request, response, authentication) -> {
-//                            String callback = request.getParameter("callback");
-//                            if (callback == null){
-//                                callback = "/login?logout";
-//                            }
-//                            response.sendRedirect(callback);
-//                        }
-//                )
+                .logout().permitAll()
                 .and()
                 .userDetailsService(userDetailsServiceBean())
                 ;
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 
     @Override

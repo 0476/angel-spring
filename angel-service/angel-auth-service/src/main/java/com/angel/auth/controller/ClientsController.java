@@ -1,7 +1,7 @@
 package com.angel.auth.controller;
 
-import com.angel.auth.config.AuthorityPropertyEditor;
-import com.angel.auth.config.SplitCollectionEditor;
+import com.angel.auth.editor.AuthorityPropertyEditor;
+import com.angel.auth.editor.SplitCollectionEditor;
 import com.angel.auth.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,10 +24,8 @@ public class ClientsController {
     private JdbcClientDetailsService clientsDetailsService;
     @InitBinder
     public void initBinder(WebDataBinder binder){
-
         binder.registerCustomEditor(Collection.class,new SplitCollectionEditor(Set.class,","));
         binder.registerCustomEditor(GrantedAuthority.class,new AuthorityPropertyEditor());
-
     }
 
     @RequestMapping(value="/form",method= RequestMethod.GET)

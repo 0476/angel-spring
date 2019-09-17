@@ -1,7 +1,6 @@
 package com.angel.user.config;//自行导入所需依赖包
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Configuration
 @EnableOAuth2Sso
@@ -38,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated();
         http.logout().logoutUrl("/logout").logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 //                .logoutSuccessHandler(logoutSuccessHandler)
-                .logoutSuccessUrl("http://localhost:2000/auth/oauth/exit")
+                .logoutSuccessUrl("http://localhost:2000/auth/oauth/logout")
                 .deleteCookies("USERSESSIONID")
                 .permitAll();
     }

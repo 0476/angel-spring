@@ -45,18 +45,17 @@ eureka:
 security:
   oauth2:
     sso:
-      login-path: /login
+      login-path: /oauth/login
     client:
       accessTokenUri: http://127.0.0.1:2000/auth/oauth/token
       authorized-grant-types: authorization_code,password,refresh_token,implicit,client_credentials
       clientAuthenticationScheme: header
-      clientId: curl_client
+      clientId: auth-service
       clientSecret: user
       scope: read,write
       useCurrentUri: true
       userAuthorizationUri: http://127.0.0.1:2000/auth/oauth/authorize
     resource:
-      id: product_api
       userInfoUri: http://127.0.0.1:2000/auth/user
     authorization:
       check-token-access: http://127.0.0.1:2000/auth/oauth/check_token

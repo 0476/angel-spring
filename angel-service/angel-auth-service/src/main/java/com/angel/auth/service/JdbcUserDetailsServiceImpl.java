@@ -1,4 +1,4 @@
-package com.angel.auth.config;
+package com.angel.auth.service;
 
 import com.angel.auth.entity.Authority;
 import org.springframework.security.core.userdetails.User;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcUserDetails implements UserDetailsService{
+public class JdbcUserDetailsServiceImpl implements UserDetailsService{
 
 
     @Override

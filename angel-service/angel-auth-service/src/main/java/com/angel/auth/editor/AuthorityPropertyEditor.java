@@ -1,4 +1,4 @@
-package com.angel.auth.config;
+package com.angel.auth.editor;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
