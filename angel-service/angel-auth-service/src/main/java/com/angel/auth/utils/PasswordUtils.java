@@ -20,7 +20,6 @@ public class PasswordUtils {
      **/
     public static String passwordEncoder(String password){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(password);
-        return encodedPassword;
+        return passwordEncoder.encode(password);
     }
 }

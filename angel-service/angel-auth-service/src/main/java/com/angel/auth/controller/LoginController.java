@@ -1,5 +1,8 @@
 package com.angel.auth.controller;
 
+import com.angel.auth.constant.Constant;
+import com.angel.auth.utils.CookieUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -32,17 +37,13 @@ public class LoginController {
     private ApprovalStore approvalStore;
     @RequestMapping("/")
     public ModelAndView root(Map<String,Object> model, Principal principal){
-
         List<Approval> approvals=clientDetailsService.listClientDetails().stream()
                 .map(clientDetails -> approvalStore.getApprovals(principal.getName(),clientDetails.getClientId()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-
-
         model.put("approvals",approvals);
         model.put("clientDetails",clientDetailsService.listClientDetails());
         return new ModelAndView ("index",model);
-
     }
 
     @Autowired
@@ -50,17 +51,29 @@ public class LoginController {
 
     @RequestMapping(value="/approval/revoke",method= RequestMethod.POST)
     public String revokApproval(@ModelAttribute Approval approval){
-
-        approvalStore.revokeApprovals(asList(approval));
+        approvalStore.revokeApprovals(Arrays.asList(approval));
         tokenStore.findTokensByClientIdAndUserName(approval.getClientId(),approval.getUserId())
                 .forEach(tokenStore::removeAccessToken) ;
         return "redirect:/";
     }
 
+
     @RequestMapping("/login")
-    public String loginPage() {
+    public String loginPage(HttpServletRequest request,HttpServletResponse response,String theme) {
+        if(StringUtils.isNotBlank(theme)){
+            Cookie cookie=new Cookie(Constant.THEME_KEY,theme);
+            response.addCookie(cookie);
+            CookieUtil.setCookie(response,Constant.THEME_KEY,theme);
+            return "themes/"+theme+"/login";
+        }else{
+            String localTheme = CookieUtil.getCookieValue(request,Constant.THEME_KEY);
+            if(StringUtils.isNotBlank(localTheme)){
+                return "themes/"+localTheme+"/login";
+            }
+        }
         return "login";
     }
+
 
 
 

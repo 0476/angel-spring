@@ -11,6 +11,9 @@ mybatis-plus:
   mapper-locations: classpath:mybatis/mappers/**/*.xml
   type-aliases-package: com.angel.common.*.entity
 spring:
+  messages:
+    encoding: UTF-8
+    basename: i18n/login/message
   profiles:
     active: dev
   application:

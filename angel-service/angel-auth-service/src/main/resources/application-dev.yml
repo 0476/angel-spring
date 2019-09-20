@@ -1,4 +1,21 @@
 spring:
+  devtools:
+    livereload:
+      enabled: true #是否支持livereload
+      port: 35729
+    restart:
+      enabled: true #是否支持热部署
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  mvc:
+    #static 文件夹下的静态文件访问路径
+    static-path-pattern: /**
   datasource:
     druid:
       stat-view-servlet:
