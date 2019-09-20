@@ -34,9 +34,6 @@ spring:
     mode: HTML5
     prefix: classpath:/templates/
     suffix: .html
-#security:
-#  oauth2:
-#    ignored: /error/**,/oauth/authorize,/oauth/token ,/oauth/user/token , /oauth/client/token   ,/user/logout ,/document.html,/webjars/**,/resources/**,/i18n/**
 eureka:
   instance:
     hostname: localhost

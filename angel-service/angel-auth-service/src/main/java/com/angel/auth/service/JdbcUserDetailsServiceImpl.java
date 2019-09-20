@@ -1,7 +1,7 @@
 package com.angel.auth.service;
 
 import com.angel.auth.entity.Authority;
-import org.springframework.security.core.userdetails.User;
+import com.angel.auth.entity.OauthUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +21,7 @@ public class JdbcUserDetailsServiceImpl implements UserDetailsService{
 //            throw new UsernameNotFoundException("User"+username+"can not be found");
 //        }
 
-        User user = new User("oauth_admin","$2a$10$BurTWIy5NTF9GJJH4magz.9Bd4bBurWYG8tmXxeQh1vs7r/wnCFG2",true,true,true,true,getAuthorities());
+        OauthUser user = new OauthUser("oauth_admin","$2a$10$BurTWIy5NTF9GJJH4magz.9Bd4bBurWYG8tmXxeQh1vs7r/wnCFG2",true,true,true,true,getAuthorities());
 
         return  user;
     }
