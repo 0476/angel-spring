@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -27,7 +28,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
-
+/**
+ * description:  登录控制器
+ * @author ailikes
+ * @date  19-10-9 16:50
+ * @since 19-10-9
+ **/
 @Controller
 public class LoginController {
     @Autowired
@@ -59,7 +65,7 @@ public class LoginController {
 
 
     @RequestMapping("/login")
-    public String loginPage(HttpServletRequest request,HttpServletResponse response,String theme) {
+    public String loginPage(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "t",required = false) String theme) {
         if(StringUtils.isNotBlank(theme)){
             Cookie cookie=new Cookie(Constant.THEME_KEY,theme);
             response.addCookie(cookie);
@@ -69,9 +75,10 @@ public class LoginController {
             String localTheme = CookieUtil.getCookieValue(request,Constant.THEME_KEY);
             if(StringUtils.isNotBlank(localTheme)){
                 return "themes/"+localTheme+"/login";
+            }else{
+                return "themes/default/login";
             }
         }
-        return "login";
     }
 
 

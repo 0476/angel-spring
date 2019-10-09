@@ -17,11 +17,11 @@
 <h1>[[#{login.header}]]</h1>
 <div class="login-form">
 	<div class="avtar">
-		<img th:src="${ctx}+'/themes/default/images/avtar.png'" />
+		<img th:src="${ctx}+'/themes/atmosphere/images/avtar.png'" />
 	</div>
 	<form action="login.do" method="post">
-		<input type="text" class="text" name="username" value="username" autocomplete="off" placeholder="[[#{login.username.placeholder}]]" >
-		<input type="password" name="password" value="password" autocomplete="off" placeholder="[[#{login.password.placeholder}]]">
+		<input type="text" class="text" name="username" th:value="#{login.username.defaultvalue}" autocomplete="off" th:placeholder="#{login.username.placeholder}" >
+		<input type="password" name="password" th:value="#{login.password.defaultvalue}" autocomplete="off" th:placeholder="#{login.password.placeholder}">
 		<div class="signin">
 			<input type="submit" th:value="#{login.submit}" >
 		</div>
